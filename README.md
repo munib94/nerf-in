@@ -4,7 +4,7 @@
 
 ## 🎯 Overview
 
-This is a **corrected and complete implementation** of NeRF-In following the paper methodology exactly:
+This is an **complete and unofficial implementation** of NeRF-In following the paper methodology exactly:
 
 - ✅ **STCN Mask Transfer**: Video object segmentation for mask propagation
 - ✅ **MST/LaMa Inpainting**: RGB guidance generation
