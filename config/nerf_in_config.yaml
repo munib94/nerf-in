@@ -1,0 +1,52 @@
+# NeRF-In Configuration File
+
+model:
+  # NeRF architecture
+  pos_embed_dim: 10
+  dir_embed_dim: 4
+  net_depth: 8
+  net_width: 256
+  skip_layers: [4]
+  
+  # Inpainting specific
+  use_rgbd_prior: true
+  use_fine_network: true
+  use_importance_sampling: true
+  depth_weight: 0.1
+  consistency_weight: 0.01
+  
+  # Sampling
+  num_samples_coarse: 64
+  num_samples_fine: 128
+  near_plane: 0.1
+  far_plane: 10.0
+
+training:
+  batch_size: 1024
+  learning_rate: 0.0005
+  num_epochs: 200
+  warmup_steps: 1000
+  
+  # Loss weights
+  rgb_weight: 1.0
+  depth_weight: 0.1
+  perceptual_weight: 0.1
+  consistency_weight: 0.01
+
+data:
+  data_path: "data/sample_data"
+  image_height: 480
+  image_width: 640
+  near_plane: 0.1
+  far_plane: 10.0
+  
+  # Inpainting specific
+  mask_ratio: 0.3
+  use_depth_prior: true
+
+# System settings
+device: null  # Auto-detect
+num_workers: 4
+log_dir: "logs"
+checkpoint_dir: "checkpoints"
+results_dir: "results"

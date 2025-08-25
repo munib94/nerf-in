@@ -205,3 +205,32 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Project-specific
+checkpoints/
+logs/
+results/
+data/sample_data/
+*.pt
+*.pth
+*.ckpt
+wandb/
+nerf_in_generator.py
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+*.iso
+*.dmg
+
+# IDE
+*.swp
+*.swo
