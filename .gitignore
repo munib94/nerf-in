@@ -215,7 +215,6 @@ data/sample_data/
 *.pth
 *.ckpt
 wandb/
-nerf_in_generator.py
 
 # OS
 .DS_Store
