@@ -26,6 +26,102 @@ This is an **complete and unofficial implementation** of NeRF-In following the p
 - **Stage 2**: NeRF-In optimization with RGB-D guidance (50,000 steps)
 - **Loss Functions**: Exact implementation of paper equations
 
+## 📁 Codebase Structure
+
+```
+nerf-in/
+├── 📁 config/                    # Configuration management
+│   ├── __init__.py
+│   ├── base_config.py           # Core configuration classes
+│   └── nerf_in_config.yaml      # Default hyperparameters
+│
+├── 📁 data/                     # Data handling & preprocessing
+│   ├── datasets/
+│   │   ├── __init__.py
+│   │   └── rgbd_dataset.py      # RGB-D dataset loader
+│   ├── loaders/
+│   │   ├── __init__.py
+│   │   └── data_utils.py        # Data loading utilities
+│   └── sample_data/             # Sample training data
+│       ├── depth/               # Depth maps
+│       ├── images/              # RGB images
+│       ├── masks/               # Inpainting masks
+│       └── poses/               # Camera poses
+│
+├── 📁 models/                   # Core neural network models
+│   ├── backends/                # Cross-platform backends
+│   │   ├── __init__.py
+│   │   ├── base_backend.py      # Backend interface
+│   │   ├── mlx_backend.py       # Apple MLX backend
+│   │   └── pytorch_backend.py   # PyTorch backend
+│   │
+│   ├── inpainting/              # NeRF-In specific components
+│   │   ├── __init__.py
+│   │   ├── bilateral_solver.py  # Fast bilateral solver for depth
+│   │   ├── inpainting_model.py  # Core inpainting model
+│   │   ├── mst_inpainting.py    # MST/LaMa inpainting
+│   │   ├── nerf_in_model.py     # Main NeRF-In model
+│   │   └── stcn_mask_transfer.py # STCN mask propagation
+│   │
+│   ├── losses/                  # Loss functions
+│   │   ├── __init__.py
+│   │   ├── consistency_loss.py  # Multi-view consistency
+│   │   ├── nerf_in_losses.py    # Paper-specific losses
+│   │   └── rendering_loss.py    # Standard rendering losses
+│   │
+│   ├── nerf/                    # Standard NeRF components
+│   │   ├── __init__.py
+│   │   ├── nerf_model.py        # Core NeRF network
+│   │   ├── positional_encoding.py # Positional encoding
+│   │   ├── ray_sampling.py      # Ray sampling strategies
+│   │   └── volume_rendering.py  # Volume rendering
+│   │
+│   ├── networks/                # Additional neural networks
+│   │   └── __init__.py
+│   └── weights/                 # Pre-trained model weights
+│
+├── 📁 scripts/                  # Training & inference scripts
+│   ├── __init__.py
+│   ├── demo.py                  # Basic demo
+│   ├── demo_nerf_in.py         # Full pipeline demo
+│   ├── infer.py                # Inference script
+│   └── train.py                # Main training script
+│
+├── 📁 training/                 # Training infrastructure
+│   ├── __init__.py
+│   └── trainer.py              # NeRF-In trainer class
+│
+├── 📁 utils/                    # Utility functions
+│   ├── __init__.py
+│   ├── backend_detector.py     # Automatic backend detection
+│   ├── camera_utils.py         # Camera & ray utilities
+│   ├── image_utils.py          # Image processing
+│   └── logging_utils.py        # Logging setup
+│
+├── 📁 evaluation/               # Evaluation & metrics
+│   ├── __init__.py
+│   └── metrics.py              # PSNR, SSIM, LPIPS metrics
+│
+├── 📁 tests/                    # Unit tests
+│   ├── __init__.py
+│   ├── test_nerf_in.py         # Main integration tests
+│   ├── test_data/              # Test data
+│   ├── test_models/            # Model tests
+│   └── test_utils/             # Utility tests
+│
+├── 📁 checkpoints/              # Saved model checkpoints
+├── 📁 logs/                     # Training logs
+├── 📁 results/                  # Inference results
+└── 📁 notebooks/                # Jupyter notebooks for analysis
+```
+
+### Key Entry Points
+- **Training**: `scripts/train.py` - Main training script
+- **Demo**: `scripts/demo_nerf_in.py` - Complete pipeline demonstration  
+- **Inference**: `scripts/infer.py` - Model inference
+- **Core Model**: `models/inpainting/nerf_in_model.py` - Main NeRF-In implementation
+- **Trainer**: `training/trainer.py` - Training loop and optimization
+
 ## 📦 Installation
 
 ```bash
@@ -96,3 +192,14 @@ python scripts/train_nerf_in.py \
 ---
 
 **This implementation provides a complete, paper-compliant NeRF-In system ready for research and application use.** 🎯
+
+## Citation
+
+```bibtex
+@article{li2022nerf,
+  title={NeRF-In: Free-Form NeRF Inpainting with RGB-D Priors},
+  author={Li, Hao and Zhong, Yiwen and Wang, Ruyu and others},
+  journal={arXiv preprint arXiv:2206.04901},
+  year={2022}
+}
+```
